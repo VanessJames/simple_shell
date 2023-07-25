@@ -19,7 +19,7 @@ static int buffer_size;
 static ssize_t custom_getline(char *line, size_t size)
 {
 	ssize_t read_bytes = 0;
-	int i;
+	ssize_t i;
 
 	while (1)
 	{
@@ -33,7 +33,7 @@ static ssize_t custom_getline(char *line, size_t size)
 			buffer_pos = 0;
 		}
 
-	for (i = buffer_pos; i < buffer_size && read_bytes < size - 1; i++)
+	for (i = buffer_pos; i < buffer_size && read_bytes < (ssize_t)(size - 1); i++)
 	{
 		if (buffer[i] == '\n')
 		{
@@ -75,7 +75,7 @@ static void process_command(char *input)
 		/* Handle exit built-in command*/
 		if (strcmp(tokens[0], "exit") == 0)
 		{
-			handle_exit();
+			handle_exit(tokens[1]);
 		}
 		/* Handle env built-in command*/
 		else if (strcmp(tokens[0], "env") == 0)
@@ -87,7 +87,7 @@ static void process_command(char *input)
 		{
 			if (!execute_command(tokens[0], tokens))
 			{
-				fprintf(stderr, "Command not found: %s\n", tokens[0])
+				fprintf(stderr, "Command not found: %s\n", tokens[0]);
 			}
 		}
 	}
@@ -106,14 +106,15 @@ static void process_command(char *input)
 
 static void interactive_shell_loop(void)
 {
-	char input[MAX_INPUT_LENGHT];
+	ssize_t bytes_read;
+	char input[MAX_INPUT_LENGTH];
 
 	while (1)
 	{
 		printf("(Vaness&Jessica's Shell) "); /* Display the prompt*/
 
 		/* Read user input*/
-		ssize_t bytes_read = custom_getline(input, MAX_INPUT_LENGTH);
+		bytes_read = custom_getline(input, MAX_INPUT_LENGTH);
 
 		if (bytes_read == -1)
 		{

@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * handle_exit - Handle the "exit" built-in shell command.
  * @arg: The argument passed to the "exit" command (optional).
@@ -24,8 +25,7 @@ void handle_exit(char *arg)
 	else
 	{
 		int exit_status = custom_atoi(arg);
-
-		exit(exit_status);
+			exit(exit_status);
 	}
 }
 
