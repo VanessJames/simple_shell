@@ -16,11 +16,10 @@
  * 0 otherwise.
  */
 
-static int execute_builtin(char *command, char *args[])
+static int execute_builtin(char *command)
 {
 	if (strcmp(command, "exit") == 0)
 	{
-		handle_exit(args[1]); /* Pass the argument to handle_exit*/
 		return (1);
 	}
 	else if (strcmp(command, "env") == 0)
@@ -97,9 +96,9 @@ static int execute_external(char *command, char *args[])
 
 int execute_command(char *command, char *args[])
 {
-	if (execute_builtin(command, args))
+	if (execute_builtin(command))
 		return (1);
 	if (execute_external(command, args))
 		return (1);
-	return (0);
+	return (execute_external(command, args));
 }

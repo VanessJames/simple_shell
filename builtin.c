@@ -1,4 +1,5 @@
 #include "shell.h"
+#include <stdlib.h>
 
 /**
  * handle_exit - Handle the "exit" built-in shell command.
@@ -17,16 +18,16 @@
 
 void handle_exit(char *arg)
 {
+	int exit_status;
+
 	if (arg == NULL)
 	{
 		exit(0);
 	}
-	else
-	{
-		int exit_status = custom_atoi(arg);
 
-		exit(exit_status);
-	}
+	exit_status = atoi(arg);
+	exit(exit_status);
+
 }
 
 /**
