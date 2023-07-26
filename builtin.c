@@ -1,5 +1,17 @@
 #include "shell.h"
 #include <stdlib.h>
+/*
+ *Custom output function to replace putchar and printf
+ */
+
+void output(const char *str)
+{
+	while (*str)
+	{
+		write (1, str, 1);
+		str++;
+	}
+}
 
 /**
  * handle_exit - Handle the "exit" built-in shell command.
@@ -43,7 +55,8 @@ void handle_env(void)
 
 	while (*env != NULL)
 	{
-		printf("%s\n", *env);
+		output(*env);
+		output("\n");
 		env++;
 	}
 }
