@@ -1,5 +1,4 @@
 #include "shell.h"
-#include <stdio.h>
 
 static char buffer[BUFFER_SIZE];
 static int buffer_pos;
@@ -10,12 +9,14 @@ static int buffer_size;
  * @line: The buffer to store the read line.
  * @size: The size of the buffer.
  *
- * Description: This function reads a line from standard input using a buffer.
- * It calls the least possible the read system call to fill the buffer.
+ * Description: This function reads a line from standard
+ * input using a buffer.It calls the least possible the
+ * read system call to fill the buffer.
  *
  * Return: The number of characters read (including the newline character),
  * -1 on failure or when encountering the end of file (Ctrl+D).
  */
+<<<<<<< HEAD
 int custom_atoi(const char *str)
 {
 	int sign = 1;
@@ -43,10 +44,13 @@ int custom_atoi(const char *str)
 
     	return result * sign;
 }
+=======
+
+>>>>>>> ff4589fed265adc380a79c6599acda6cbe7e446c
 static ssize_t custom_getline(char *line, size_t size)
 {
 	ssize_t read_bytes = 0;
-	ssize_t i;
+	int i;
 
 	while (1)
 	{
@@ -55,26 +59,27 @@ static ssize_t custom_getline(char *line, size_t size)
 			/* Buffer is empty, read from standard input*/
 			buffer_size = read(STDIN_FILENO, buffer, BUFFER_SIZE);
 			if (buffer_size <= 0)
-			/* Error or end of file (Ctrl+D)*/
+				/* Error or end of file (Ctrl+D)*/
 				return (-1);
 			buffer_pos = 0;
 		}
 
-	for (i = buffer_pos; i < buffer_size && read_bytes < (ssize_t)(size - 1); i++)
-	{
-		if (buffer[i] == '\n')
+		for (i = buffer_pos; i < buffer_size &&
+				read_bytes < (ssize_t)(size - 1); i++)
 		{
-			/* Found newline, include it in the line and terminate*/
-			line[read_bytes] = '\n';
-			line[read_bytes + 1] = '\0';
-			buffer_pos = i + 1;
-			return (read_bytes + 1);
+			if (buffer[i] == '\n')
+			{
+				/* Found newline, include it in the line and terminate*/
+				line[read_bytes] = '\n';
+				line[read_bytes + 1] = '\0';
+				buffer_pos = i + 1;
+				return (read_bytes + 1);
+			}
+			else
+			{
+				line[read_bytes++] = buffer[i];
+			}
 		}
-		else
-		{
-			line[read_bytes++] = buffer[i];
-		}
-	}
 
 		buffer_pos = buffer_size;
 	}
@@ -99,17 +104,24 @@ static void process_command(char *input)
 
 	if (tokens[0] != NULL)
 	{
-		/* Handle exit built-in command*/
+		/* Handle exit built-in command */
 		if (strcmp(tokens[0], "exit") == 0)
 		{
-			handle_exit(tokens[1]);
+			if (tokens[1] != NULL)
+			{
+				handle_exit(tokens[1]);
+			}
+			else
+			{
+				handle_exit(NULL);
+			}
 		}
-		/* Handle env built-in command*/
+		/* Handle env built-in command */
 		else if (strcmp(tokens[0], "env") == 0)
 		{
 			handle_env();
 		}
-		/* Execute other commands*/
+		/* Execute other commands */
 		else
 		{
 			if (!execute_command(tokens[0], tokens))
@@ -124,8 +136,7 @@ static void process_command(char *input)
  * interactive_shell_loop - Run the interactive shell loop.
  *
  * Description: This function initializes the interactive shell loop,
- * displaying
- * the shell name at startup, and continuously waits for user input.
+ * displaying the shell name at startup, and continuously waits for user input.
  * It reads user input using the custom_getline function, parses the
  * input into tokens, and then processes and executes the commands
  * based on the input provided by the user.
@@ -138,14 +149,14 @@ static void interactive_shell_loop(void)
 
 	while (1)
 	{
-		printf("(Vaness&Jessica's Shell) "); /* Display the prompt*/
+		printf("(Vaness&Jessica's Shell) "); /* Display the prompt */
 
-		/* Read user input*/
+		/* Read user input */
 		bytes_read = custom_getline(input, MAX_INPUT_LENGTH);
 
 		if (bytes_read == -1)
 		{
-			printf("\n"); /* Handle end of file (Ctrl+D)*/
+			printf("\n"); /* Handle end of file (Ctrl+D) */
 			break;
 		}
 

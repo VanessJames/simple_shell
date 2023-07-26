@@ -3,7 +3,7 @@
 
 #define MAX_INPUT_LENGTH 1024
 #define MAX_TOKENS 64
-#define DELIMITER "\t\r\n\a"
+#define DELIMITER " \t\r\n\a"
 #define BUFFER_SIZE 1024
 
 #include <stdio.h>
@@ -21,10 +21,12 @@ void parse_input(char *input, char *tokens[]);
 int execute_command(char *command, char *args[]);
 void handle_exit(char *arg);
 void handle_env(void);
-int custom_atoi(const char *str);
 
 /* External declaration for environ variable */
 extern char **environ;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ff4589fed265adc380a79c6599acda6cbe7e446c
 #endif
