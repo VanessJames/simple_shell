@@ -3,7 +3,6 @@
 /**
  * execute_builtin - Execute a built-in shell command.
  * @command: The command to be executed.
- * @args: An array of arguments for the command.
  *
  * Description: This function checks if the given command
  * is a built-in shell command
@@ -81,7 +80,6 @@ static int execute_external(char *command, char *args[])
 /**
  * execute_command - Execute a shell command.
  * @command: The command to be executed.
- * @args: An array of arguments for the command.
  *
  * Description: This function checks if the given command is
  * a built-in shell command
@@ -97,8 +95,8 @@ static int execute_external(char *command, char *args[])
 int execute_command(char *command, char *args[])
 {
 	if (execute_builtin(command))
+	{
 		return (1);
-	if (execute_external(command, args))
-		return (1);
+	}
 	return (execute_external(command, args));
 }

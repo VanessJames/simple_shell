@@ -34,7 +34,8 @@ static ssize_t custom_getline(char *line, size_t size)
 			buffer_pos = 0;
 		}
 
-		for (i = buffer_pos; i < buffer_size && read_bytes < (ssize_t)(size - 1); i++)
+		for (i = buffer_pos; i < buffer_size &&
+				read_bytes < (ssize_t)(size - 1); i++)
 		{
 			if (buffer[i] == '\n')
 			{
