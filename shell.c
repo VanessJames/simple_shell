@@ -16,37 +16,6 @@ static int buffer_size;
  * Return: The number of characters read (including the newline character),
  * -1 on failure or when encountering the end of file (Ctrl+D).
  */
-<<<<<<< HEAD
-int custom_atoi(const char *str)
-{
-	int sign = 1;
-	int result = 0;
-
-	while (isspace(*str))
-	{
-		str++;
-	}
-
-	if (*str == '-')
-    	{
-        	sign = -1;
-        	str++;
-    	}
-    	else if (*str == '+')
-    	{
-        	str++;
-    	}
-	while (isdigit(*str))
-    	{
-        	result = result * 10 + (*str - '0');
-        	str++;
-    	}
-
-    	return result * sign;
-}
-=======
-
->>>>>>> ff4589fed265adc380a79c6599acda6cbe7e446c
 static ssize_t custom_getline(char *line, size_t size)
 {
 	ssize_t read_bytes = 0;

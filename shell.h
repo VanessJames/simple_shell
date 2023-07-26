@@ -13,7 +13,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stddef.h>
-#include <ctype.h>
 
 /* The Function prototypes for each file */
 int main(void);
@@ -25,8 +24,4 @@ void handle_env(void);
 /* External declaration for environ variable */
 extern char **environ;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ff4589fed265adc380a79c6599acda6cbe7e446c
 #endif
