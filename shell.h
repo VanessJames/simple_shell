@@ -13,9 +13,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stddef.h>
+#include <ctype.h>
 
 /* The Function prototypes for each file */
-int main (void);
+int main(void);
 void parse_input(char *input, char *tokens[]);
 int execute_command(char *command, char *args[]);
 void handle_exit(char *arg);
@@ -26,4 +27,4 @@ int custom_atoi(const char *str);
 extern char **environ;
 
 
-#endif 
+#endif
