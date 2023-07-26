@@ -80,6 +80,7 @@ static int execute_external(char *command, char *args[])
 /**
  * execute_command - Execute a shell command.
  * @command: The command to be executed.
+ * @args: An array of arguments for the command.
  *
  * Description: This function checks if the given command is
  * a built-in shell command
