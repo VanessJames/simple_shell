@@ -8,20 +8,8 @@
 
 int main(void)
 {
-	char *input;
-	size_t len = 0;
+	printf("Welcome to Vaness&Jessica's Shell!\n");
+	interactive_shell_loop();
 
-	do {
-		display_prompt();
-		input = NULL;
-		getline(&input, &len, stdin);
-
-		if (input != NULL)
-		{
-			execute_command_line(input);
-			free(input);
-		}
-	} while (1);
-
-	return (EXIT_SUCCESS);
+	return (0);
 }
