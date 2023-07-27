@@ -1,4 +1,6 @@
 #include "shell.h"
+#include <limits.h>
+#include <unistd.h>
 
 /**
  * handle_exit - Handles the built-in exit command.
@@ -28,6 +30,7 @@ void handle_exit(char *status)
 void handle_cd(char *directory)
 {
 	char *home_dir = getenv("HOME");
+	char current_dir[PATH_MAX];
 
 	if (directory == NULL)
 	{
@@ -51,12 +54,10 @@ void handle_cd(char *directory)
 			perror("cd");
 	}
 
-	char current_dir[PATH_MAX];
-
-	if (getcwd(current_dir, sizeof(current_dir)) != NULL)
-	{
-		setenv("PWD", current_dir, 1);
-	}
+        if (getcwd(current_dir, sizeof(current_dir)) != NULL)
+        {
+                setenv("PWD", current_dir, 1);
+        }
 }
 
 /**
@@ -67,6 +68,7 @@ void handle_cd(char *directory)
 
 void handle_env(void)
 {
+	extern char **environ;
 	char **env = environ;
 
 	while (*env != NULL)
