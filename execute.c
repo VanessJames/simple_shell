@@ -22,14 +22,14 @@ int execute_command(char **args)
 
 		if (pid < 0)
 		{
-			perror("fork");
+			perror(args[0]);
 			return (1);
 		}
 		else if (pid == 0)
 		{
 			if (execve(args[0], args, environ) == -1)
 			{
-				perror("execve");
+				perror(args[0]);
 				exit(EXIT_FAILURE);
 			}
 		}
