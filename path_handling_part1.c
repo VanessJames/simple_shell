@@ -17,17 +17,15 @@ char *find_executable(char *command)
 	int i, j, found;
 
 	if (!path || !command)
-	{
 		return (NULL);
-	}
+
 	command_len = strlen(command);
 	path_copy_len = strlen(path) + 1;
 	path_copy = (char *)malloc(path_copy_len);
 	if (!path_copy)
-	{
 		perror("malloc");
 		return (NULL);
-	}
+
 	strcpy(path_copy, path);
 	dir = strtok(path_copy, ":");
 	while (dir != NULL)
@@ -36,20 +34,18 @@ char *find_executable(char *command)
 		executable_len = dir_len + command_len + 2;
 		executable = (char *)malloc(executable_len);
 		if (!executable)
-		{
 			perror("malloc");
 			free(path_copy);
 			return (NULL);
-		}
+
 		strcpy(executable, dir);
 		strcat(executable, "/");
 		strcat(executable, command);
 		found = access(executable, X_OK);
 		if (found == 0)
-		{
 			free(path_copy);
 			return (executable);
-		}
+
 		free(executable);
 		dir = strtok(NULL, ":");
 	}
