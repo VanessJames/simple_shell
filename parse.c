@@ -12,6 +12,7 @@ char **parse_line(char *line)
 	char *token;
 	int bufsize = TOKEN_BUFSIZE;
 	int position = 0;
+	char **tokens = malloc(sizeof(char *) * (token_bufsize + 1));
 
 	args = (char **)malloc(bufsize * sizeof(char *));
 	if (!args)
